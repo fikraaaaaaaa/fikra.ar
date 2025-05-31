@@ -91,105 +91,58 @@ const cities = {
   "AR": { city: "بوينس آيرس", country: "الأرجنتين" },
   "MX": { city: "مدينة مكسيكو", country: "المكسيك" }
 };
-  
 
-const currencies = {
-  "SA": "ريال سعودي",
-  "EG": "جنيه مصري",
-  "AE": "درهم إماراتي",
-  "JO": "دينار أردني",
-  "TR": "ليرة تركية",
-  "DZ": "دينار جزائري",
-  "MA": "درهم مغربي",
-  "SD": "جنيه سوداني",
-  "IQ": "دينار عراقي",
-  "KW": "دينار كويتي",
-  "QA": "ريال قطري",
-  "BH": "دينار بحريني",
-  "OM": "ريال عماني",
-  "YE": "ريال يمني",
-  "SY": "ليرة سورية",
-  "LB": "ليرة لبنانية",
-  "TN": "دينار تونسي",
-  "PS": "شيكل فلسطيني",
-  "LY": "دينار ليبي",
-  "PK": "روبية باكستانية",
-  "IN": "روبية هندية",
-  "BD": "تاكا بنغلاديشي",
-  "ID": "روبية إندونيسية",
-  "MY": "رينغيت ماليزي",
-  "NG": "نايرا نيجيري",
-  "US": "دولار أمريكي",
-  "FR": "يورو",
-  "DE": "يورو",
-  "GB": "جنيه إسترليني",
-  "CA": "دولار كندي",
-  "AU": "دولار أسترالي",
-  "CN": "يوان صيني",
-  "JP": "ين ياباني",
-  "RU": "روبل روسي",
-  "ES": "يورو",
-  "IT": "يورو",
-  "SE": "كرونا سويدية",
-  "BR": "ريال برازيلي",
-  "AR": "بيزو أرجنتيني",
-  "MX": "بيزو مكسيكي"
-};
+async function loadPrayerTimes() {
+  const selectedCode = document.getElementById("country").value;
+  const { city, country } = cities[selectedCode];
+  const tbody = document.querySelector("#prayerTable tbody");
 
-  
-    async function loadPrayerTimes() {
-      const selectedCode = document.getElementById("country").value;
-      const { city, country } = cities[selectedCode];
-      const tbody = document.querySelector("#prayerTable tbody");
-  
-      tbody.innerHTML = `<tr><td colspan="2">جارٍ التحميل...</td></tr>`;
-  
-      try {
-        const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=2`);
-        const data = await response.json();
-        const timings = data.data.timings;
-  
-        const prayers = {
-          "الفجر": timings.Fajr,
-          "الظهر": timings.Dhuhr,
-          "العصر": timings.Asr,
-          "المغرب": timings.Maghrib,
-          "العشاء": timings.Isha
-        };
-  
-        tbody.innerHTML = "";
-        for (const [prayer, time] of Object.entries(prayers)) {
-          const row = `<tr><td>${prayer}</td><td>${time}</td></tr>`;
-          tbody.innerHTML += row;
-        }
-  
-      } catch (error) {
-        tbody.innerHTML = `<tr><td colspan="2">حدث خطأ في تحميل البيانات</td></tr>`;
-        console.error(error);
-      }
+  tbody.innerHTML = `<tr><td colspan="2">جارٍ التحميل...</td></tr>`;
+
+  try {
+    const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=2`);
+    const data = await response.json();
+    const timings = data.data.timings;
+
+    const prayers = {
+      "الفجر": timings.Fajr,
+      "الظهر": timings.Dhuhr,
+      "العصر": timings.Asr,
+      "المغرب": timings.Maghrib,
+      "العشاء": timings.Isha
+    };
+
+    tbody.innerHTML = "";
+    for (const [prayer, time] of Object.entries(prayers)) {
+      const row = `<tr><td>${prayer}</td><td>${time}</td></tr>`;
+      tbody.innerHTML += row;
     }
-  
-  const countrySelect = document.getElementById("country");
-  for (const code in cities) {
+
+  } catch (error) {
+    tbody.innerHTML = `<tr><td colspan="2">حدث خطأ في تحميل البيانات</td></tr>`;
+    console.error(error);
+  }
+}
+
+const countrySelect = document.getElementById("country");
+for (const code in cities) {
   const option = document.createElement("option");
   option.value = code;
   option.textContent = `${cities[code].country}`;
   countrySelect.appendChild(option);
-  }
-  
-  if (localStorage.getItem("selectedCountry")) {
-    countrySelect.value = localStorage.getItem("selectedCountry");
-    loadPrayerTimes(); 
-    loadPrayerTimesAndCurrency(); 
+}
+
+if (localStorage.getItem("selectedCountry")) {
+  countrySelect.value = localStorage.getItem("selectedCountry");
+  loadPrayerTimes();
 }
 
 countrySelect.addEventListener("change", () => {
-    localStorage.setItem("selectedCountry", countrySelect.value);
-    loadPrayerTimes(); 
-    loadPrayerTimesAndCurrency(); 
+  localStorage.setItem("selectedCountry", countrySelect.value);
+  loadPrayerTimes();
 });
-  
-    loadPrayerTimes();
+
+loadPrayerTimes();
 
 
 
