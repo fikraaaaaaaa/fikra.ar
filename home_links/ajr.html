@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فِكْرَةْ - الأجر</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      flex-wrap: wrap;
+      direction: rtl;
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .links a {
+      color: #d1d1d1;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    .links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .country-select select {
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #00bcd4;
+  background-color: #1b263bb4;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.country-select select:hover {
+  border-color: #fca311;
+  background-color: #243447;
+}
+
+
+    .tasbeeh-container {
+      margin: 80px auto;
+      max-width: 600px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+      text-align: center;
+    }
+
+    .tasbeeh-container h2 {
+      color: #fca311;
+      margin-bottom: 20px;
+    }
+
+    .beads {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .bead {
+      width: 40px;
+      height: 40px;
+      background-color: #00bcd4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+
+    .bead:active {
+      transform: scale(1.2);
+    }
+
+    .counter {
+      font-size: 24px;
+      color: #ffeb3b;
+      margin-top: 10px;
+    }
+
+    .reload {
+      margin-top: 15px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #9cac0b;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+    }
+
+    
+
+    footer {
+  background-color: #111;
+  color: #fff;
+  padding: 20px 10px;
+  font-family: 'Cairo', sans-serif;
+  border-top: 1px solid #333;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; 
+}
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+      gap: 15px;
+    }
+
+    .footer-copy {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social a img {
+      width: 34px;
+      height: 34px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-social a:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .beads {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stars"></canvas>
+
+  <header>
+    <a href="../index.html"><img src="../home_images/logo.png" alt="logo" class="logo" /></a>
+    <div class="links">
+      <a href="salat.html">أوقات الصلاة</a>
+      <a href="ajr.html">أجر</a>
+      <a href="zakah.html">حساب الزكاة</a>
+    </div>
+    <div class="country-select">
+      <select id="country" onchange="loadPrayerTimes(); loadPrayerTimesAndCurrency();"></select>
+    </div>
+  </header>
+
+  <div class="tasbeeh-container">
+    <h2>سُبْحَانَ اللّه</h2>
+    <div class="beads" id="beads"></div>
+    <div class="counter">عدد التسبيحات: <span id="count">0</span></div>
+    <button class="reload" onclick="reloadBeads()">
+    إعادة التسبيح ↻
+    </button>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-copy">© 2025 فكرة - جميع الحقوق محفوظة</div>
+      <div class="footer-social">
+        <a href="https://discord.com/t00unsi" target="_blank" aria-label="Discord">
+          <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="Discord">
+        </a>
+        <a href="https://instagram.com/9SqgdCVSj5" target="_blank" aria-label="Instagram">
+          <img src="https://www.svgrepo.com/show/452229/instagram-1.svg" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const beadsContainer = document.getElementById('beads');
+    const countSpan = document.getElementById('count');
+    let count = 0;
+
+    function createBeads() {
+      beadsContainer.innerHTML = '';
+      for (let i = 0; i < 33; i++) {
+        const bead = document.createElement('div');
+        bead.classList.add('bead');
+        bead.innerText = '•';
+
+        bead.addEventListener('touchstart', () => handleBead(bead), { passive: true });
+        bead.addEventListener('mousedown', () => handleBead(bead));
+
+        beadsContainer.appendChild(bead);
+      }
+    }
+
+   function handleBead(bead) {
+  if (!bead.classList.contains('used')) {
+    bead.classList.add('used');
+    bead.style.backgroundColor = '#4caf50';
+    count++;
+    countSpan.innerText = count;
+    const allUsed = [...document.querySelectorAll('.bead')].every(b => b.classList.contains('used'));
+    if (allUsed) {
+      setTimeout(() => {
+        createBeads(); // فقط إعادة توليد الخرزات بدون تصفير العداد
+      }, 500);
+    }
+  }
+}
+
+    function reloadBeads() {
+      count = 0;
+      countSpan.innerText = count;
+      createBeads();
+    }
+
+    createBeads();
+  </script>
+<script src="../main.js"></script>
+</body>
+
+</html>

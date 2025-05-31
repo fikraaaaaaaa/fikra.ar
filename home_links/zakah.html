@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فِكْرَةْ | حساب الزكاة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    * {
+      box-sizing: border-box;
+    }
+
+     body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      direction: rtl;
+      flex-wrap: wrap;
+     
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    .links {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .links a {
+      color: #d1d1d1;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: 0.3s ease;
+      font-size: 18px;
+      font-family: "Cairo", sans-serif;
+    }
+
+    .links a:hover {
+      background-color: #302c2c6c;
+    }
+
+    .country-select select {
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #00bcd4;
+  background-color: #1b263bbd;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.country-select select:hover {
+  border-color: #fca311;
+  background-color: #243447;
+}
+
+    .zakahdiv {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .zakahdiv1, .par {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+    }
+
+    .zakahdiv1 input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .zakahdiv1 h1, .zakahdiv1 span {
+      font-size: 22px;
+    }
+
+    .par h1 {
+      font-size: 26px;
+      color: #00bcd4;
+    }
+
+    .par h2 {
+      font-size: 20px;
+      color: #ffeb3b;
+    }
+
+    .par p, .par li {
+      font-size: 18px;
+      line-height: 2;
+      color: #ccc;
+    }
+
+    .par ul {
+      padding-right: 20px;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    footer {
+  background-color: #111;
+  color: #fff;
+  padding: 20px 10px;
+  font-family: 'Cairo', sans-serif;
+  border-top: 1px solid #333;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; 
+}
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-copy {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social a img {
+      width: 34px;
+      height: 34px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-social a:hover img {
+      transform: scale(1.1);
+    }
+
+
+    @media(max-width: 1024px) {
+      .zakahdiv {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .links {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+
+    @media(max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .logo {
+        width: 60px;
+      }
+
+      .links a {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+
+      .zakahdiv1 h1, .zakahdiv1 span {
+        font-size: 18px;
+      }
+
+      .par h1, .par h2 {
+        font-size: 20px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div style="flex: 1; display: flex; align-items: center;">
+      <a href="../index.html">
+        <img src="../home_images/logo.png" alt="logo" class="logo" />
+      </a>
+    </div>
+  
+    <div class="links" style="flex: 2; text-align: center;">
+      <a href="salat.html">أوقات الصلاة</a>
+      <a href="ajr.html">أجر</a>
+      <a href="zakah.html">حساب الزكاة</a>
+    </div>
+  
+    <div class="country-select" style="flex: 1; display: flex; justify-content: end;">
+      <select id="country" onchange="loadPrayerTimes(); loadPrayerTimesAndCurrency();"></select>
+    </div>
+  </header>
+
+    
+  <div class="zakahdiv">
+    <div class="zakahdiv1">
+      <h1>حساب الزكاة:</h1>
+      <input type="text" placeholder="أدخل المبلغ المالي..." id="zakahinput" oninput="calculateZakah()" />
+      <h1>قدر الزكاة: <span id="kdr">0</span> <span id="currency">ريال سعودي</span></h1>
+      <h1>نسبة الزكاة: <span>2.5%</span></h1>
+    </div>
+
+    <div class="par">
+      <h1>زكاة المال:</h1>
+      <h2>هي:</h2>
+      <p>زكاة تُفرض على المال النقدي أو المدخرات إذا بلغت نصابًا وحال عليها الحول (سنة هجرية كاملة).</p>
+      <h2>شروطها:</h2>
+      <ul>
+        <li>أن يبلغ المال النصاب (ما يعادل قيمة 85 جرام ذهب تقريبًا).</li>
+        <li>أن يمر على المال سنة هجرية كاملة.</li>
+        <li>أن يكون المال فائضًا عن حاجات الشخص الأساسية.</li>
+      </ul>
+      <h2>مقدارها:</h2>
+      <p>تدفع 2.5% (ربع العُشر) من مجموع المال.</p>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="footer-container">
+      <div class="footer-copy">© 2025 فكرة - جميع الحقوق محفوظة</div>
+      <div class="footer-social">
+        <a href="https://discord.com/9SqgdCVSj5" target="_blank" aria-label="Discord">
+          <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="Discord">
+        </a>
+        <a href="https://instagram.com/t00unsi" target="_blank" aria-label="Instagram">
+          <img src="https://www.svgrepo.com/show/452229/instagram-1.svg" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </footer>
+  
+
+  <canvas id="stars"></canvas>
+  <script src="../main.js"></script>
+  <script>
+    function calculateZakah() {
+      const input = document.getElementById("zakahinput").value;
+      const amount = parseFloat(input);
+      if (!isNaN(amount)) {
+        const zakah = (amount * 0.025).toFixed(2);
+        document.getElementById("kdr").innerText = zakah;
+      } else {
+        document.getElementById("kdr").innerText = 0;
+      }
+    }
+  </script>
+</body>
+
+</html>
+
+</body>
+
+</html>

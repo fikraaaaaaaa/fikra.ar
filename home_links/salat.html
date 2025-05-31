@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فِكْرَةْ - أوقات الصلاة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #000;
+      color: white;
+      overflow-x: hidden;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+
+   
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      flex-wrap: wrap;
+      direction: rtl;
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .links a {
+      color: #d1d1d1;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: 0.3s ease;
+    }
+
+    .links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .country-select select {
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #00bcd4;
+  background-color: #1b263baf;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.country-select select:hover {
+  border-color: #fca311;
+  background-color: #243447;
+}
+
+    .prayer-container {
+      margin: 60px auto;
+      min-width: 600px;
+      max-width: 600px;
+      background-color: rgba(27, 38, 59, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      
+    }
+
+    .prayer-container h2 {
+      margin-bottom: 20px;
+      color: #fca311;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px;
+      border-bottom: 1px solid #778da9;
+      text-align: center;
+    }
+
+    th {
+      background-color: #415a77;
+      color: #f1faee;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+   footer {
+  background-color: #111;
+  color: #fff;
+  padding: 20px 10px;
+  font-family: 'Cairo', sans-serif;
+  border-top: 1px solid #333;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; 
+}
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+      gap: 15px;
+    }
+
+    .footer-copy {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social a img {
+      width: 34px;
+      height: 34px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-social a:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .prayer-container {
+        min-width: 350px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <header>
+    <a href="../index.html"><img src="../home_images/logo.png" alt="logo" class="logo" /></a>
+    <div class="links">
+      <a href="salat.html">أوقات الصلاة</a>
+      <a href="ajr.html">أجر</a>
+      <a href="zakah.html">حساب الزكاة</a>
+    </div>
+    <div class="country-select">
+      <select id="country" onchange="loadPrayerTimes(); loadPrayerTimesAndCurrency();"></select>
+    </div>
+  </header>
+  <div class="prayer-container">
+    <h2>أوقات الصلاة</h2>
+    <table id="prayerTable">
+      <thead>
+        <tr>
+          <th>الصلاة</th>
+          <th>الوقت</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="2">جارٍ التحميل...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-copy">© 2025 فكرة - جميع الحقوق محفوظة</div>
+      <div class="footer-social">
+        <a href="https://discord.com/9SqgdCVSj5" target="_blank" aria-label="Discord">
+          <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="Discord">
+        </a>
+        <a href="https://instagram.com/t00unsi" target="_blank" aria-label="Instagram">
+          <img src="https://www.svgrepo.com/show/452229/instagram-1.svg" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="../main.js"></script>
+</body>
+</html>
