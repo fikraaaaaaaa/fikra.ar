@@ -34,7 +34,6 @@
       background: black;
     }
 
-   
     header {
       display: flex;
       justify-content: space-between;
@@ -70,28 +69,28 @@
     }
 
     .country-select select {
-  padding: 10px 40px 10px 15px;
-  border-radius: 8px;
-  border: 2px solid #00bcd4;
-  background-color: #1b263baf;
-  color: #fff;
-  font-weight: bold;
-  font-family: 'Cairo', sans-serif;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
-  background-repeat: no-repeat;
-  background-position: left 10px center;
-  background-size: 16px;
-  cursor: pointer;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
+      padding: 10px 40px 10px 15px;
+      border-radius: 8px;
+      border: 2px solid #00bcd4;
+      background-color: #1b263baf;
+      color: #fff;
+      font-weight: bold;
+      font-family: 'Cairo', sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
+      background-repeat: no-repeat;
+      background-position: left 10px center;
+      background-size: 16px;
+      cursor: pointer;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
 
-.country-select select:hover {
-  border-color: #fca311;
-  background-color: #243447;
-}
+    .country-select select:hover {
+      border-color: #fca311;
+      background-color: #243447;
+    }
 
     .prayer-container {
       margin: 60px auto;
@@ -101,7 +100,6 @@
       border-radius: 15px;
       padding: 25px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-      
     }
 
     .prayer-container h2 {
@@ -130,16 +128,16 @@
       border-bottom: none;
     }
 
-   footer {
-  background-color: #111;
-  color: #fff;
-  padding: 20px 10px;
-  font-family: 'Cairo', sans-serif;
-  border-top: 1px solid #333;
-  text-align: center;
-  width: 100%;
-  margin-top: auto; 
-}
+    footer {
+      background-color: #111;
+      color: #fff;
+      padding: 20px 10px;
+      font-family: 'Cairo', sans-serif;
+      border-top: 1px solid #333;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+    }
 
     .footer-container {
       display: flex;
@@ -199,9 +197,10 @@
       <a href="zakah.html">حساب الزكاة</a>
     </div>
     <div class="country-select">
-      <select id="country" onchange="loadPrayerTimes(); loadPrayerTimesAndCurrency();"></select>
+      <select id="country" onchange="loadPrayerTimes();"></select>
     </div>
   </header>
+
   <div class="prayer-container">
     <h2>أوقات الصلاة</h2>
     <table id="prayerTable">
@@ -230,7 +229,6 @@
       </div>
     </div>
   </footer>
-
 
   <script src="../main.js"></script>
 </body>
